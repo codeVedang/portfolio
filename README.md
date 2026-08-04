@@ -7,6 +7,7 @@ A responsive personal portfolio website built from Vedang Kumar Tripathi's resum
 - Hero with resume-based visual treatment
 - Experience timeline
 - Featured projects with live demo and GitHub links
+- ModeMesh AI multi-agent platform project
 - Technical skills
 - Education and certifications
 - Embedded resume preview and downloadable PDF

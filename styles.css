@@ -456,6 +456,19 @@ li + li {
   background: var(--violet);
 }
 
+.featured-card {
+  grid-column: 1 / -1;
+}
+
+.featured-card::before {
+  background: var(--coral);
+}
+
+.featured-card .project-label {
+  background: rgba(242, 111, 76, 0.12);
+  color: var(--coral);
+}
+
 .project-topline {
   display: flex;
   flex-wrap: wrap;
@@ -683,6 +696,10 @@ li + li {
   .timeline-item {
     grid-template-columns: 1fr;
     gap: 12px;
+  }
+
+  .featured-card {
+    grid-column: auto;
   }
 
   .timeline-date {

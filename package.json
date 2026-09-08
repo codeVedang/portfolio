@@ -6,7 +6,8 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "dev": "node scripts/serve.mjs",
-    "check": "node scripts/check.mjs"
+    "check": "node scripts/check.mjs",
+    "check:dist": "node scripts/check.mjs --dist"
   },
   "devDependencies": {
     "@fontsource-variable/manrope": "^5.2.8",

@@ -1,4 +1,4 @@
-import { writeFileSync, mkdirSync, copyFileSync } from "node:fs";
+import { writeFileSync, mkdirSync, copyFileSync, cpSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
@@ -239,4 +239,10 @@ for (const [filename, title, description, active, content] of pages)
     path.join(root, filename),
     page(title, description, active, content),
   );
-console.log(`Built ${pages.length} static portfolio pages.`);
+// Keep direct-file previews working while publishing only the static site.
+const output = path.join(root, "dist");
+mkdirSync(output, { recursive: true });
+for (const filename of [...pages.map(([filename]) => filename), "styles.css", "script.js"])
+  copyFileSync(path.join(root, filename), path.join(output, filename));
+cpSync(path.join(root, "assets"), path.join(output, "assets"), { recursive: true });
+console.log(`Built ${pages.length} static portfolio pages in dist/.`);

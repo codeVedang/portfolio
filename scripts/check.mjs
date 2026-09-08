@@ -4,8 +4,17 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { parse } from "parse5";
 
-const root = fileURLToPath(new URL("../", import.meta.url));
+const projectRoot = fileURLToPath(new URL("../", import.meta.url));
+const root = process.argv.includes("--dist") ? path.join(projectRoot, "dist") : projectRoot;
 const pages = readdirSync(root).filter((file) => file.endsWith(".html"));
+assert.equal(pages.length, 7, "Build contains all seven pages");
+if (process.argv.includes("--dist")) {
+  const config = JSON.parse(readFileSync(path.join(projectRoot, "vercel.json"), "utf8"));
+  assert.equal(config.outputDirectory, "dist");
+  assert.equal(config.framework, null);
+  for (const privatePath of ["node_modules", "scripts", ".git", ".preview", "package.json"])
+    assert(!existsSync(path.join(root, privatePath)), `Deployment excludes ${privatePath}`);
+}
 const walk = (node) => [node, ...(node.childNodes || []).flatMap(walk)];
 const attr = (node, name) => node.attrs?.find((a) => a.name === name)?.value;
 const text = (node) =>

@@ -31,3 +31,9 @@ Then visit `http://localhost:5175`. Use `npm run dev -- --port 5176` if that por
 Edit shared page templates/content in `scripts/build.mjs`, styling in `styles.css`, and interactions in `script.js`. Re-run `npm run build` after template edits; it generates the seven HTML files and copies local fonts/icons. No framework or third-party CDN is required in the browser. Dependency licenses are included beside the font and icon files.
 
 The contact form prepares a `mailto:` draft. It does not send or store messages and needs a configured email app. All live project and repository links remain external.
+
+## Vercel Deployment
+
+`vercel.json` explicitly selects a static site (Framework Preset: Other), runs `npm run build`, and publishes `dist/`. The build copies all seven HTML pages, CSS, browser JavaScript, and assets into that directory. Source scripts and development dependencies are not published.
+
+Run `npm run build` and `npm run check:dist` to validate the deployment output locally. Use the repository root as the Vercel Root Directory. The root-level HTML remains available for local previews.
